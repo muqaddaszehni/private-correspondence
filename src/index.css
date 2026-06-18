@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #f7f4ee;
+  color: #1c1c1c;
+  font-family: Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* A very faint printed-paper grain laid over the whole page. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+@layer components {
+  .label {
+    @apply font-sans uppercase tracking-label text-[11px] font-medium text-brass-deep;
+  }
+  .label-muted {
+    @apply font-sans uppercase tracking-label text-[10.5px] font-medium text-ink/45;
+  }
+  /* Hairline rule with a brass tick at the start, annual-report style. */
+  .rule {
+    @apply h-px w-full bg-hairline;
+  }
+}
+
+/* Letter body legibility: refined serif, generous leading. */
+.letter-en {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.78;
+  letter-spacing: 0.005em;
+}
+.letter-tc {
+  font-family: 'Noto Serif TC', 'Cormorant Garamond', serif;
+  font-size: 16px;
+  line-height: 1.95;
+}
+.letter-sc {
+  font-family: 'Noto Serif SC', 'Cormorant Garamond', serif;
+  font-size: 16px;
+  line-height: 1.95;
+}
+
+/* Subtle staggered entrance for the page on first load. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* Custom scrollbars that stay quiet. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d8d2c6 transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #d8d2c6;
+  border-radius: 0;
+}
+
+/* React Flow surface — kept on the ivory palette, no default grid blue. */
+.react-flow__attribution {
+  display: none;
+}
